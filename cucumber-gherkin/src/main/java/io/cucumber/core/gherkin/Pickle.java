@@ -8,6 +8,10 @@ import java.util.Optional;
 
 public interface Pickle {
 
+    boolean isFirstInFeature();
+
+    boolean isLastInFeature();
+
     String getKeyword();
 
     String getLanguage();
