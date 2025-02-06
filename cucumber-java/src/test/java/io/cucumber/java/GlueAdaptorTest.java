@@ -58,6 +58,8 @@ public class GlueAdaptorTest {
     private ParameterTypeDefinition parameterTypeDefinition;
     private HookDefinition afterStepHook;
     private HookDefinition beforeStepHook;
+    private HookDefinition afterFeatureHook;
+    private HookDefinition beforeFeatureHook;
     private HookDefinition afterHook;
     private HookDefinition beforeHook;
     private StaticHookDefinition afterAllHook;
@@ -100,7 +102,16 @@ public class GlueAdaptorTest {
         @Override
         public void addAfterStepHook(HookDefinition afterStepHook) {
             GlueAdaptorTest.this.afterStepHook = afterStepHook;
+        }
 
+        @Override
+        public void addBeforeFeatureHook(HookDefinition beforeFeatureHook) {
+            GlueAdaptorTest.this.beforeFeatureHook = beforeFeatureHook;
+        }
+
+        @Override
+        public void addAfterFeatureHook(HookDefinition afterFeatureHook) {
+            GlueAdaptorTest.this.afterFeatureHook = afterFeatureHook;
         }
 
         @Override
@@ -161,6 +172,8 @@ public class GlueAdaptorTest {
             () -> assertThat(parameterTypeDefinition.parameterType().useRegexpMatchAsStrongTypeHint(), is(false)),
             () -> assertThat(afterStepHook, notNullValue()),
             () -> assertThat(beforeStepHook, notNullValue()),
+            () -> assertThat(afterFeatureHook, notNullValue()),
+            () -> assertThat(beforeFeatureHook, notNullValue()),
             () -> assertThat(afterHook, notNullValue()),
             () -> assertThat(beforeHook, notNullValue()),
             () -> assertThat(beforeAllHook, notNullValue()),
@@ -221,6 +234,16 @@ public class GlueAdaptorTest {
 
     @Before
     public void before() {
+
+    }
+
+    @AfterFeature
+    public void afterFeature() {
+
+    }
+
+    @BeforeFeature
+    public void beforeFeature() {
 
     }
 

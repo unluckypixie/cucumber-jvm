@@ -51,6 +51,8 @@ final class JavaHookDefinition extends AbstractGlueDefinition implements HookDef
                 .addAnnotation(After.class)
                 .addAnnotation(BeforeStep.class)
                 .addAnnotation(AfterStep.class)
+                .addAnnotation(BeforeFeature.class)
+                .addAnnotation(AfterFeature.class)
                 .addSignature("public void before_or_after(io.cucumber.java.Scenario scenario)")
                 .addSignature("public void before_or_after()")
                 .build();

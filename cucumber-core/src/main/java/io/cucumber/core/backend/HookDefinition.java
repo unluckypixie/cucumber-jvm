@@ -25,6 +25,10 @@ public interface HookDefinition extends Located {
 
         BEFORE_STEP,
 
-        AFTER_STEP;
+        AFTER_STEP,
+
+        BEFORE_FEATURE,
+
+        AFTER_FEATURE;
     }
 }

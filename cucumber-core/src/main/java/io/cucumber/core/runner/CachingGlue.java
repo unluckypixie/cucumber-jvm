@@ -71,6 +71,8 @@ final class CachingGlue implements Glue {
     private final List<CoreHookDefinition> afterStepHooks = new ArrayList<>();
     private final List<CoreHookDefinition> afterHooks = new ArrayList<>();
     private final List<StaticHookDefinition> afterAllHooks = new ArrayList<>();
+    private final List<CoreHookDefinition> beforeFeatureHooks = new ArrayList<>();
+    private final List<CoreHookDefinition> afterFeatureHooks = new ArrayList<>();
 
     /*
      * Storing the pattern that matches the step text allows us to cache the
@@ -129,6 +131,18 @@ final class CachingGlue implements Glue {
     }
 
     @Override
+    public void addBeforeFeatureHook(HookDefinition hookDefinition) {
+        beforeFeatureHooks.add(CoreHookDefinition.create(hookDefinition, bus::generateId));
+        beforeFeatureHooks.sort(HOOK_ORDER_ASCENDING);
+    }
+
+    @Override
+    public void addAfterFeatureHook(HookDefinition hookDefinition) {
+        afterFeatureHooks.add(CoreHookDefinition.create(hookDefinition, bus::generateId));
+        afterFeatureHooks.sort(HOOK_ORDER_ASCENDING);
+    }
+
+    @Override
     public void addParameterType(ParameterTypeDefinition parameterType) {
         parameterTypeDefinitions.add(parameterType);
     }
@@ -175,6 +189,10 @@ final class CachingGlue implements Glue {
         return new ArrayList<>(beforeStepHooks);
     }
 
+    Collection<CoreHookDefinition> getBeforeFeatureHooks() {
+        return new ArrayList<>(beforeFeatureHooks);
+    }
+
     Collection<CoreHookDefinition> getAfterHooks() {
         List<CoreHookDefinition> hooks = new ArrayList<>(afterHooks);
         Collections.reverse(hooks);
@@ -183,6 +201,12 @@ final class CachingGlue implements Glue {
 
     Collection<CoreHookDefinition> getAfterStepHooks() {
         List<CoreHookDefinition> hooks = new ArrayList<>(afterStepHooks);
+        Collections.reverse(hooks);
+        return hooks;
+    }
+
+    Collection<CoreHookDefinition> getAfterFeatureHooks() {
+        List<CoreHookDefinition> hooks = new ArrayList<>(afterFeatureHooks);
         Collections.reverse(hooks);
         return hooks;
     }
@@ -445,8 +469,10 @@ final class CachingGlue implements Glue {
         stepDefinitionsByPattern.clear();
         removeScenarioScopedGlue(beforeHooks);
         removeScenarioScopedGlue(beforeStepHooks);
+        removeScenarioScopedGlue(beforeFeatureHooks);
         removeScenarioScopedGlue(afterHooks);
         removeScenarioScopedGlue(afterStepHooks);
+        removeScenarioScopedGlue(afterFeatureHooks);
         removeScenarioScopedGlue(stepDefinitions);
         removeScenarioScopedGlue(dataTableTypeDefinitions);
         removeScenarioScopedGlue(docStringTypeDefinitions);

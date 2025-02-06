@@ -7,8 +7,10 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 import static io.cucumber.core.backend.HookDefinition.HookType.AFTER;
+import static io.cucumber.core.backend.HookDefinition.HookType.AFTER_FEATURE;
 import static io.cucumber.core.backend.HookDefinition.HookType.AFTER_STEP;
 import static io.cucumber.core.backend.HookDefinition.HookType.BEFORE;
+import static io.cucumber.core.backend.HookDefinition.HookType.BEFORE_FEATURE;
 import static io.cucumber.core.backend.HookDefinition.HookType.BEFORE_STEP;
 
 final class GlueAdaptor {
@@ -50,6 +52,16 @@ final class GlueAdaptor {
             String tagExpression = afterStep.value();
             glue.addAfterStepHook(
                 new JavaHookDefinition(AFTER_STEP, method, tagExpression, afterStep.order(), lookup));
+        } else if (annotationType.equals(BeforeFeature.class)) {
+            BeforeFeature beforeFeature = (BeforeFeature) annotation;
+            String tagExpression = beforeFeature.value();
+            glue.addBeforeFeatureHook(
+                new JavaHookDefinition(BEFORE_FEATURE, method, tagExpression, beforeFeature.order(), lookup));
+        } else if (annotationType.equals(AfterFeature.class)) {
+            AfterFeature afterFeature = (AfterFeature) annotation;
+            String tagExpression = afterFeature.value();
+            glue.addAfterFeatureHook(
+                new JavaHookDefinition(AFTER_FEATURE, method, tagExpression, afterFeature.order(), lookup));
         } else if (annotationType.equals(ParameterType.class)) {
             ParameterType parameterType = (ParameterType) annotation;
             String pattern = parameterType.value();

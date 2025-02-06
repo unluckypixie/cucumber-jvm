@@ -19,6 +19,10 @@ public interface Glue {
 
     void addAfterStepHook(HookDefinition afterStepHook);
 
+    void addBeforeFeatureHook(HookDefinition beforeFeatureHook);
+
+    void addAfterFeatureHook(HookDefinition afterFeatureHook);
+
     void addParameterType(ParameterTypeDefinition parameterType);
 
     void addDataTableType(DataTableTypeDefinition dataTableType);
