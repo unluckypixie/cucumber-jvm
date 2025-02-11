@@ -22,6 +22,7 @@ final class GherkinMessagesFeature implements Feature {
     private final io.cucumber.messages.types.Feature feature;
     private final URI uri;
     private final List<Pickle> pickles;
+    private final List<Pickle> specialPickles;
     private final List<Envelope> envelopes;
     private final String gherkinSource;
     private final List<Node> children;
@@ -36,7 +37,9 @@ final class GherkinMessagesFeature implements Feature {
         this.feature = requireNonNull(feature);
         this.uri = requireNonNull(uri);
         this.gherkinSource = requireNonNull(gherkinSource);
-        this.pickles = requireNonNull(pickles);
+        this.specialPickles = requireNonNull(pickles);
+        this.pickles = requireNonNull(pickles).stream().filter(pickle -> pickle instanceof GherkinMessagesPickle)
+                .collect(Collectors.toList());
         this.envelopes = requireNonNull(envelopes);
 
         this.children = feature.getChildren().stream()
@@ -91,7 +94,6 @@ final class GherkinMessagesFeature implements Feature {
     public Pickle getPickleAt(Node node) {
         Location location = node.getLocation();
         return pickles.stream()
-                .filter(pickle -> pickle.getLocation().equals(location))
                 .findFirst()
                 .orElseThrow(() -> new NoSuchElementException("No pickle in " + uri + " at " + location));
     }
@@ -99,6 +101,10 @@ final class GherkinMessagesFeature implements Feature {
     @Override
     public List<Pickle> getPickles() {
         return pickles;
+    }
+
+    public List<Pickle> getSpecialPickles() {
+        return specialPickles;
     }
 
     @Override
