@@ -44,7 +44,12 @@ class JsonFormatterTest {
         String expected = new Scanner(resourceAsStream, "UTF-8")
                 .useDelimiter("\\A")
                 .next();
-
+        
+        System.out.println("EXPECTED:");
+        System.out.println(expected);
+        System.out.println("OUT:");
+        System.out.println(out);
+        
         assertJsonEquals(expected, out);
     }
 

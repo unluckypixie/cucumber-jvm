@@ -11,6 +11,8 @@ public interface Feature extends Node.Feature {
 
     List<Pickle> getPickles();
 
+    List<Pickle> getSpecialPickles();
+
     URI getUri();
 
     String getSource();

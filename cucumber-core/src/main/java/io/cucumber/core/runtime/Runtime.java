@@ -81,7 +81,7 @@ public final class Runtime {
     private void runFeatures(List<Feature> features) {
         features.forEach(context::beforeFeature);
         List<Future<?>> executingPickles = features.stream()
-                .flatMap(feature -> feature.getPickles().stream())
+                .flatMap(feature -> feature.getSpecialPickles().stream())
                 .filter(filter)
                 .collect(collectingAndThen(toList(),
                     list -> pickleOrder.orderPickles(list).stream()))
