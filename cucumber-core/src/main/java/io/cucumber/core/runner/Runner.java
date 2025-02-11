@@ -144,23 +144,8 @@ public final class Runner {
         }
 
         List<PickleStepTestStep> testSteps = createTestStepsForPickleSteps(pickle);
-
-        List<HookTestStep> beforeHooks = new ArrayList<>();
-
-        if (pickle.isFirstInFeature()) {
-            beforeHooks.addAll(createTestStepsForBeforeFeatureHooks(pickle.getTags()));
-        }
-
-        beforeHooks.addAll(createTestStepsForBeforeHooks(pickle.getTags()));
-
-        List<HookTestStep> afterHooks = new ArrayList<>();
-
-        afterHooks.addAll(createTestStepsForAfterHooks(pickle.getTags()));
-
-        if (pickle.isLastInFeature()) {
-            afterHooks.addAll(createTestStepsForAfterFeatureHooks(pickle.getTags()));
-        }
-
+        List<HookTestStep> beforeHooks = createTestStepsForBeforeHooks(pickle.getTags());
+        List<HookTestStep> afterHooks = createTestStepsForAfterHooks(pickle.getTags());
         return new TestCase(bus.generateId(), testSteps, beforeHooks, afterHooks, pickle, runnerOptions.isDryRun());
     }
 
@@ -191,14 +176,6 @@ public final class Runner {
 
     private List<HookTestStep> createTestStepsForAfterHooks(List<String> tags) {
         return createTestStepsForHooks(tags, glue.getAfterHooks(), HookType.AFTER);
-    }
-
-    private List<HookTestStep> createTestStepsForBeforeFeatureHooks(List<String> tags) {
-        return createTestStepsForHooks(tags, glue.getBeforeFeatureHooks(), HookType.BEFORE);
-    }
-
-    private List<HookTestStep> createTestStepsForAfterFeatureHooks(List<String> tags) {
-        return createTestStepsForHooks(tags, glue.getAfterFeatureHooks(), HookType.AFTER);
     }
 
     private PickleStepDefinitionMatch matchStepToStepDefinition(Pickle pickle, Step step) {
