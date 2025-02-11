@@ -94,6 +94,7 @@ final class GherkinMessagesFeature implements Feature {
     public Pickle getPickleAt(Node node) {
         Location location = node.getLocation();
         return pickles.stream()
+                .filter(pickle -> pickle.getLocation().equals(location))
                 .findFirst()
                 .orElseThrow(() -> new NoSuchElementException("No pickle in " + uri + " at " + location));
     }
