@@ -93,7 +93,7 @@ class FeatureParserTest {
         try (InputStream source = Files.newInputStream(
             Paths.get("src/test/resources/io/cucumber/core/gherkin/messages/empty-table.feature"))) {
             Feature feature = parser.parse(uri, source, UUID::randomUUID).get();
-            Pickle pickle = feature.getPickles().get(1);
+            Pickle pickle = feature.getPickles().get(0);
             Step step = pickle.getSteps().get(0);
             DataTableArgument argument = (DataTableArgument) step.getArgument();
             assertEquals(5, argument.getLine());
@@ -106,7 +106,7 @@ class FeatureParserTest {
             Paths.get("src/test/resources/io/cucumber/core/gherkin/messages/doc-string.feature"))) {
 
             Feature feature = parser.parse(uri, source, UUID::randomUUID).get();
-            Pickle pickle = feature.getPickles().get(1);
+            Pickle pickle = feature.getPickles().get(0);
             List<Step> steps = pickle.getSteps();
 
             assertAll(() -> {
@@ -121,7 +121,7 @@ class FeatureParserTest {
         try (InputStream source = Files.newInputStream(
             Paths.get("src/test/resources/io/cucumber/core/gherkin/messages/background.feature"))) {
             Feature feature = parser.parse(uri, source, UUID::randomUUID).get();
-            Pickle pickle = feature.getPickles().get(1);
+            Pickle pickle = feature.getPickles().get(0);
             List<Step> steps = pickle.getSteps();
             assertEquals(3, steps.size());
         }

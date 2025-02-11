@@ -17,7 +17,6 @@ import io.cucumber.core.runtime.StubBackendSupplier;
 import io.cucumber.core.runtime.StubFeatureSupplier;
 import io.cucumber.core.runtime.TimeServiceEventBus;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -160,7 +159,6 @@ class TimelineFormatterTest {
     }
 
     @Test
-    @Disabled
     void shouldWriteItemsCorrectlyToReportJsWhenRunInParallel() throws Throwable {
         runtimeOptionsBuilder.setThreads(2);
         runFormatterWithPlugin();
@@ -312,7 +310,6 @@ class TimelineFormatterTest {
     }
 
     @Test
-    @Disabled
     void shouldWriteItemsAndGroupsCorrectlyToReportJs() throws Throwable {
         runFormatterWithPlugin();
 

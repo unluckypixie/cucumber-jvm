@@ -14,7 +14,6 @@ import io.cucumber.core.runtime.TimeServiceEventBus;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.docstring.DocString;
 import org.json.JSONException;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -631,7 +630,6 @@ class JsonFormatterTest {
     }
 
     @Test
-    @Disabled
     void should_format_feature_and_scenario_with_tags() throws JSONException {
         Feature feature = TestFeatureParser.parse("path/test.feature", "" +
                 "@Party @Banana\n" +

@@ -15,7 +15,6 @@ import io.cucumber.core.runtime.SingletonObjectFactorySupplier;
 import io.cucumber.core.runtime.ThreadLocalRunnerSupplier;
 import io.cucumber.core.runtime.TimeServiceEventBus;
 import io.cucumber.tagexpressions.TagExpressionParser;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
@@ -388,7 +387,6 @@ class FeatureRunnerTest {
     }
 
     @Test
-    @Disabled
     void should_filter_pickles() {
         Feature feature = TestPickleBuilder.parseFeature("path/test.feature", "" +
                 "Feature: feature name\n" +

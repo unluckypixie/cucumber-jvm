@@ -17,7 +17,6 @@ import io.cucumber.core.stepexpression.StepExpressionFactory;
 import io.cucumber.core.stepexpression.StepTypeRegistry;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.docstring.DocString;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -202,7 +201,6 @@ class PrettyFormatterTest {
     }
 
     @Test
-    @Disabled
     void should_print_tags() {
         Feature feature = TestFeatureParser.parse("path/test.feature", "" +
                 "@feature_tag\n" +

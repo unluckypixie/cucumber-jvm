@@ -10,7 +10,6 @@ import io.cucumber.core.plugin.JsonFormatter;
 import io.cucumber.core.plugin.MessageFormatter;
 import io.cucumber.core.runtime.Runtime;
 import org.hamcrest.Matcher;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -31,7 +30,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsIterableContainingInRelativeOrder.containsInRelativeOrder;
 import static org.hamcrest.collection.IsMapContaining.hasEntry;
 
-@Disabled
 public class CompatibilityTest {
 
     @ParameterizedTest
