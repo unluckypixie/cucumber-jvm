@@ -36,16 +36,6 @@ public class GherkinMessagesFeaturePickle implements Pickle {
         this.isFirstInFeature = isFirstInFeature;
         this.delegatePickle = delegatePickle;
         this.tags = featureTags.stream().map(tag -> tag.getName()).collect(Collectors.toList());
-
-        // this.pickle = new io.cucumber.messages.types.Pickle(
-        // pickleId,
-        // uri.toString(),
-        // isFirstInFeature ? "@BeforeFeature" : "@AfterFeature",
-        // delegatePickle.getLanguage(),
-        // emptyList(),
-        // featureTags.stream().map(tag -> new PickleTag(tag.getName(),
-        // tag.getId())).collect(Collectors.toList()),
-        // delegatePickle.getAstNodeIds());
     }
 
     @Override
