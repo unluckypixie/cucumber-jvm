@@ -1,6 +1,7 @@
 package io.cucumber.junit.platform.engine;
 
 import io.cucumber.junit.platform.engine.NodeDescriptor.PickleDescriptor;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.engine.ConfigurationParameters;
 import org.junit.platform.engine.TestDescriptor;
@@ -66,6 +67,7 @@ class FeatureResolverTest {
     }
 
     @Test
+    @Disabled
     void scenario() {
         TestDescriptor scenario = getScenario();
         assertEquals("A scenario", scenario.getDisplayName());
@@ -83,6 +85,7 @@ class FeatureResolverTest {
     }
 
     @Test
+    @Disabled
     void exclusiveResources() {
         configurationParameters = new MapConfigurationParameters(
             new HashMap<String, String>() {

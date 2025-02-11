@@ -138,24 +138,21 @@ public final class Runner {
     }
 
     private TestCase createTestCaseForPickle(Pickle pickle) {
-        if (pickle.getSteps().isEmpty()) {
-            return new TestCase(bus.generateId(), emptyList(), emptyList(), emptyList(), pickle,
-                runnerOptions.isDryRun());
-        }
-
-        List<PickleStepTestStep> testSteps = createTestStepsForPickleSteps(pickle);
-
+        List<PickleStepTestStep> testSteps;
         List<HookTestStep> beforeHooks = new ArrayList<>();
+        List<HookTestStep> afterHooks = new ArrayList<>();
 
         if (pickle.isFirstInFeature()) {
             beforeHooks.addAll(createTestStepsForBeforeFeatureHooks(pickle.getTags()));
         }
 
-        beforeHooks.addAll(createTestStepsForBeforeHooks(pickle.getTags()));
-
-        List<HookTestStep> afterHooks = new ArrayList<>();
-
-        afterHooks.addAll(createTestStepsForAfterHooks(pickle.getTags()));
+        if (!pickle.getSteps().isEmpty()) {
+            beforeHooks.addAll(createTestStepsForBeforeHooks(pickle.getTags()));
+            afterHooks.addAll(createTestStepsForAfterHooks(pickle.getTags()));
+            testSteps = createTestStepsForPickleSteps(pickle);
+        } else {
+            testSteps = emptyList();
+        }
 
         if (pickle.isLastInFeature()) {
             afterHooks.addAll(createTestStepsForAfterFeatureHooks(pickle.getTags()));

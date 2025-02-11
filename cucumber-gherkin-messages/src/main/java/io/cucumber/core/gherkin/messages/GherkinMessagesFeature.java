@@ -38,15 +38,11 @@ final class GherkinMessagesFeature implements Feature {
         this.gherkinSource = requireNonNull(gherkinSource);
         this.pickles = requireNonNull(pickles);
         this.envelopes = requireNonNull(envelopes);
+
         this.children = feature.getChildren().stream()
                 .filter(this::hasRuleOrScenario)
                 .map(this::mapRuleOrScenario)
                 .collect(Collectors.toList());
-
-        if (!pickles.isEmpty()) {
-            ((GherkinMessagesPickle) (pickles.get(0))).setFirstInFeature(true);
-            ((GherkinMessagesPickle) (pickles.get(pickles.size() - 1))).setLastInFeature(true);
-        }
     }
 
     private Node mapRuleOrScenario(FeatureChild featureChild) {

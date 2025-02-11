@@ -16,6 +16,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -79,9 +80,28 @@ public final class GherkinMessagesFeatureParser implements FeatureParser {
                             .map(Optional::get)
                             .collect(toList());
 
-                    List<Pickle> pickles = pickleMessages.stream()
-                            .map(pickle -> new GherkinMessagesPickle(pickle, path, dialect, cucumberQuery))
-                            .collect(toList());
+                    List<Pickle> pickles = new ArrayList<>();
+
+                    if (!pickleMessages.isEmpty()) {
+
+                        // Add a BeforeFeature pickle ...
+                        final io.cucumber.messages.types.Pickle firstPickle = pickleMessages.get(0);
+                        pickles.add(
+                            new GherkinMessagesFeaturePickle(idGenerator.get().toString(), path, dialect, cucumberQuery,
+                                firstPickle, feature.getTags(), true));
+
+                        // Add all the regular pickles ...
+                        pickles.addAll(pickleMessages.stream()
+                                .map(pickle -> new GherkinMessagesPickle(pickle, path, dialect, cucumberQuery))
+                                .collect(toList()));
+
+                        // Add an AfterFeature pickle ...
+                        final io.cucumber.messages.types.Pickle lastPickle = pickleMessages
+                                .get(pickleMessages.size() - 1);
+                        pickles.add(
+                            new GherkinMessagesFeaturePickle(idGenerator.get().toString(), path, dialect, cucumberQuery,
+                                lastPickle, feature.getTags(), false));
+                    }
 
                     Source sourceMessage = envelopes.stream()
                             .map(Envelope::getSource)

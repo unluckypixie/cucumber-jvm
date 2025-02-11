@@ -6,6 +6,7 @@ import io.cucumber.core.gherkin.Pickle;
 import io.cucumber.tagexpressions.TagExpressionParser;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.stream;
@@ -111,7 +112,9 @@ class TagPredicateTest {
                 "  " + String.join(" ", tags) + "\n" +
                 "  Scenario: Test scenario\n" +
                 "     Given I have 4 cukes in my belly\n");
-        return feature.getPickles().get(0);
+
+        List<Pickle> pickles = feature.getPickles();
+        return pickles.size() == 1 ? pickles.get(0) : pickles.get(1);
     }
 
     private static TagPredicate createPredicate(String... expressions) {

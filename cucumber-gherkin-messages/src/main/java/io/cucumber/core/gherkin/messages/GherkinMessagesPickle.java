@@ -27,8 +27,6 @@ final class GherkinMessagesPickle implements Pickle {
     private final List<Step> steps;
     private final URI uri;
     private final CucumberQuery cucumberQuery;
-    private boolean isFirstInFeature;
-    private boolean isLastInFeature;
 
     GherkinMessagesPickle(
             io.cucumber.messages.types.Pickle pickle, URI uri, GherkinDialect dialect, CucumberQuery cucumberQuery
@@ -132,22 +130,14 @@ final class GherkinMessagesPickle implements Pickle {
         return pickle.getId();
     }
 
-    public void setFirstInFeature(boolean isFirstInFeature) {
-        this.isFirstInFeature = isFirstInFeature;
-    }
-
-    public void setLastInFeature(boolean isLastInFeature) {
-        this.isLastInFeature = isLastInFeature;
-    }
-
     @Override
     public boolean isFirstInFeature() {
-        return isFirstInFeature;
+        return false;
     }
 
     @Override
     public boolean isLastInFeature() {
-        return isLastInFeature;
+        return false;
     }
 
 }
