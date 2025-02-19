@@ -71,4 +71,11 @@ public interface Pickle {
 
     String getId();
 
+    void setFirstInFeature(boolean isFirst);
+
+    boolean isFirstInFeature();
+
+    void setLastInFeature(boolean isLast);
+
+    boolean isLastInFeature();
 }

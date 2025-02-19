@@ -28,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 import static io.cucumber.core.runtime.SynchronizedEventBus.synchronize;
 import static java.util.Collections.emptyList;
@@ -80,14 +81,8 @@ public final class Runtime {
 
     private void runFeatures(List<Feature> features) {
         features.forEach(context::beforeFeature);
-        List<Future<?>> executingPickles = features.stream()
-                .flatMap(feature -> feature.getPickles().stream())
-                .filter(filter)
-                .collect(collectingAndThen(toList(),
-                    list -> pickleOrder.orderPickles(list).stream()))
-                .limit(limit > 0 ? limit : Integer.MAX_VALUE)
-                .map(pickle -> executor.submit(executePickle(pickle)))
-                .collect(toList());
+
+        List<Future<?>> executingPickles = features.stream().flatMap(this::executeFeature).collect(toList());
 
         executor.shutdown();
 
@@ -101,6 +96,23 @@ public final class Runtime {
                 executor.shutdownNow();
             }
         }
+    }
+
+    private Stream<Future<?>> executeFeature(Feature feature) {
+        final List<Pickle> filteredPickles = feature.getPickles().stream()
+                .filter(filter)
+                .collect(collectingAndThen(toList(), list -> pickleOrder.orderPickles(list).stream()))
+                .limit(limit > 0 ? limit : Integer.MAX_VALUE)
+                .collect(toList());
+
+        if (filteredPickles.isEmpty()) {
+            return Stream.empty();
+        }
+
+        filteredPickles.get(0).setFirstInFeature(true);
+        filteredPickles.get(filteredPickles.size() - 1).setLastInFeature(true);
+
+        return filteredPickles.stream().map(pickle -> executor.submit(executePickle(pickle)));
     }
 
     private Runnable executePickle(Pickle pickle) {
