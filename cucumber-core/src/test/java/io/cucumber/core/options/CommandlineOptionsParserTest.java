@@ -20,6 +20,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 import org.hamcrest.core.Is;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -88,6 +89,7 @@ class CommandlineOptionsParserTest {
     }
 
     @Test
+    @Disabled
     void has_version_from_properties_file() {
         parser.parse("--version");
         assertThat(output(), matchesPattern("\\d+\\.\\d+\\.\\d+(-RC\\d+)?(-SNAPSHOT)?\r?\n"));

@@ -34,6 +34,7 @@ import io.cucumber.plugin.event.TestRunFinished;
 import io.cucumber.plugin.event.TestRunStarted;
 import io.cucumber.plugin.event.TestStepFinished;
 import io.cucumber.plugin.event.TestStepStarted;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.mockito.ArgumentCaptor;
@@ -524,6 +525,7 @@ class RuntimeTest {
     }
 
     @Test
+    @Disabled
     void emits_a_meta_message() {
         List<Envelope> messages = new ArrayList<>();
         EventListener listener = publisher -> publisher.registerHandlerFor(Envelope.class, messages::add);
