@@ -10,6 +10,76 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- [JUnit Platform Engine] Add `cucumber.junit-platform.discovery.as-root-engine` to work around SBT issues ([#3023](https://github.com/cucumber/cucumber-jvm/pull/3023) M.P. Korstanje)
+
+### Fixed
+- [JUnit Platform Engine] Don't use Java 9+ APIs ([#3025](https://github.com/cucumber/cucumber-jvm/pull/3025) M.P. Korstanje)
+- [JUnit Platform Engine] Implement toString on custom DiscoverySelectors
+  [Core] Fix incomplete id for scenarios under rules in json output ([#3026](https://github.com/cucumber/cucumber-jvm/pull/3026) M.P. Korstanje)
+
+## [7.25.0] - 2025-07-10
+### Changed
+- [Core] Add status icons to pretty formatter ([pretty-formatter/#5](https://github.com/cucumber/pretty-formatter/pull/5))
+
+## [7.24.0] - 2025-07-07
+### Added
+- [JUnit Platform Engine] Option to include a parameterized scenario name only if the scenario is parameterized ([#2835](https://github.com/cucumber/cucumber-jvm/pull/2835) M.P. Korstanje)
+- [JUnit Platform Engine] Option to order features and scenarios ([#2835](https://github.com/cucumber/cucumber-jvm/pull/2835) M.P. Korstanje)
+- [JUnit Platform Engine] Log discovery issues when a classpath resource selector is (e.g. `@SelectClasspathResource`) is used to select a directory. ([#2835](https://github.com/cucumber/cucumber-jvm/pull/2835) M.P. Korstanje)
+
+### Changed
+- [JUnit Platform Engine] Use JUnit's `EngineDiscoveryRequestResolver` to resolve classpath based resources. ([#2835](https://github.com/cucumber/cucumber-jvm/pull/2835) M.P. Korstanje)
+- [JUnit Platform Engine] Use JUnit Platform 1.13.3 (JUnit Jupiter 5.13.3)
+- [Core] Use a message based [Pretty Formatter](https://github.com/cucumber/pretty-formatter) ([#2835](https://github.com/cucumber/cucumber-jvm/pull/3012) M.P. Korstanje)
+- [Core] Update dependency io.cucumber:gherkin to v33.0.0
+- [Core] Update dependency io.cucumber:messages to v28.2.0
+- [Core] Update dependency io.cucumber:html-formatter to v21.13.0
+- [Core] Update dependency io.cucumber:junit-xml-formatter to v0.8.0
+- [Core] Update dependency io.cucumber:query to v13.4.0
+- [Core] Update dependency io.cucumber:testng-xml-formatter to v0.4.1
+
+### Deprecated
+- [JUnit] Deprecate `cucumber-junit` in favour of `cucumber-junit-platform-engine` ([#2835](https://github.com/cucumber/cucumber-jvm/pull/3016) M.P. Korstanje)
+
+### Fixed
+- [JUnit Platform Engine] Log discovery issues for feature files with parse errors. ([#2835](https://github.com/cucumber/cucumber-jvm/pull/2835) M.P. Korstanje)
+
+## [7.23.0] - 2025-05-29
+### Added
+- [JUnit Platform Engine, TestNG] Remove framework elements from `UndefinedStepException` stacktrace ([#3002](https://github.com/cucumber/cucumber-jvm/pull/3002) M.P. Korstanje)
+- [JUnit Platform Engine] Add `surefire` naming strategy ([#3003](https://github.com/cucumber/cucumber-jvm/pull/3003) M.P. Korstanje)
+
+### Changed
+- [JUnit Platform Engine] Use `number-and-pickle-if-parameterized` example naming strategy by default ([#3004](https://github.com/cucumber/cucumber-jvm/pull/3004) M.P. Korstanje)
+
+## [7.22.2] - 2025-05-12
+### Changed
+- [Archetype] Assume new projects are created with at least Java 17
+
+### Fixed
+- [Core] Convert parameterized objects with `@DefaultDataTableEntryTransformer` ([#2995](https://github.com/cucumber/cucumber-jvm/pull/2995) Jean Tissot)
+
+## [7.22.1] - 2025-04-24
+### Changed
+- [JUnit Platform Engine] Use JUnit Platform 1.12.2 (JUnit Jupiter 5.12.2)
+
+### Fixed
+- [Core] Fix issue with hook steps not being rendered in html report [react-components/#379](https://github.com/cucumber/react-components/pull/379)
+
+## [7.22.0] - 2025-04-05
+### Changed
+- [Core] Improved Gherkin parser performance ([gherkin/#372](https://github.com/cucumber/gherkin/pull/372) M.P. Korstanje & Julien Kronegg)
+- [Core] Improved caching glue performance ([#2971](https://github.com/cucumber/cucumber-jvm/pull/2971) M.P. Korstanje & Julien Kronegg)
+- [Java, Java8] Significantly reduced number of emitted step- and hook-definition messages ([#2971](https://github.com/cucumber/cucumber-jvm/pull/2971) M.P. Korstanje & Julien Kronegg)
+- [Core] Removed workarounds to limit size of html report ([#2971](https://github.com/cucumber/cucumber-jvm/pull/2971) M.P. Korstanje & Julien Kronegg)
+- [JUnit Platform Engine] Use JUnit Platform 1.12.0 (JUnit Jupiter 5.12.0)
+
+### Deprecated
+- [Core] Deprecated `ScenarioScoped` glue ([#2971](https://github.com/cucumber/cucumber-jvm/pull/2971) M.P. Korstanje & Julien Kronegg)
+
+### Fixed
+- [Core] Remove duplications in steps in html report due to empty parameters ([react-components/#373](https://github.com/cucumber/react-components/pull/373))
 
 ## [7.21.1] - 2025-02-07
 ### Fixed
@@ -375,7 +445,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Weld] Removed `cucumber-weld` in favour of `cucumber-jakarta-cdi` or `cucumber-cdi2`. ([#2276](https://github.com/cucumber/cucumber-jvm/issues/2276) M.P. Korstanje)
 - [Needle] Removed `cucumber-needled` in favour of `cucumber-jakarta-cdi` or `cucumber-cdi2`. ([#2276](https://github.com/cucumber/cucumber-jvm/issues/2276) M.P. Korstanje)
 
-[Unreleased]: https://github.com/cucumber/cucumber-jvm/compare/v7.21.1...HEAD
+[Unreleased]: https://github.com/cucumber/cucumber-jvm/compare/v7.25.0...HEAD
+[7.25.0]: https://github.com/cucumber/cucumber-jvm/compare/v7.24.0...v7.25.0
+[7.24.0]: https://github.com/cucumber/cucumber-jvm/compare/v7.23.0...v7.24.0
+[7.23.0]: https://github.com/cucumber/cucumber-jvm/compare/v7.22.2...v7.23.0
+[7.22.2]: https://github.com/cucumber/cucumber-jvm/compare/v7.22.1...v7.22.2
+[7.22.1]: https://github.com/cucumber/cucumber-jvm/compare/v7.22.0...v7.22.1
+[7.22.0]: https://github.com/cucumber/cucumber-jvm/compare/v7.21.1...v7.22.0
 [7.21.1]: https://github.com/cucumber/cucumber-jvm/compare/v7.21.0...v7.21.1
 [7.21.0]: https://github.com/cucumber/cucumber-jvm/compare/v7.20.1...v7.21.0
 [7.20.1]: https://github.com/cucumber/cucumber-jvm/compare/v7.20.0...v7.20.1
