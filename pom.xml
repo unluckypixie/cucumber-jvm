@@ -4,11 +4,11 @@
     <parent>
         <groupId>io.cucumber</groupId>
         <artifactId>cucumber-parent</artifactId>
-        <version>4.3.7-BCA-1-SNAPSHOT</version>
+        <version>4.3.7-BCA-1</version>
         <relativePath/>
     </parent>
     <artifactId>cucumber-jvm</artifactId>
-    <version>7.26.0-BCA-2-SNAPSHOT</version>
+    <version>7.26.0-BCA-2</version>
     <packaging>pom</packaging>
     <name>Cucumber-JVM</name>
     <description>Cucumber for the JVM</description>
@@ -18,7 +18,7 @@
         <!-- Tool chains, ect -->
         <base.java.version>1.8</base.java.version>
         <javadoc.java.version>8</javadoc.java.version>
-        <project.build.outputTimestamp>1752490184</project.build.outputTimestamp>
+        <project.build.outputTimestamp>1752579755</project.build.outputTimestamp>
     </properties>
 
     <scm>
